@@ -2,7 +2,7 @@
 /**
 * Plugin Name: RTL Meta Box
 * Plugin URI: 
-* Description: Add meta box to every page and post. If active on a page/post the css changes the body screen reading to rtl (right to left) for the_content & the_title. 
+* Description: Add meta box to every page and post. If active on a page the css changes the body screen reading to rtl (right to left) for the_content & the_title. 
 * Version: 1.0
 * Author: espiat
 * Author URI: www.m.espiat.com
@@ -149,14 +149,12 @@ new Rational_Meta_Box;
 
 // 
 function rtl_title( $title) {
-	if (   in_the_loop() && is_single()   ){
-
+	if (   in_the_loop() && is_page()   ){
 		$rtlwert = get_post_meta(  get_the_ID(), 'rtl_switch_active', true );
 				
-$title = '<div dir="RTL">'. $title. '</div>'.$rtlwert;
-				if($rtlwert == "YES")
+				if($rtlwert === "Yes")
 					{
-					
+						$title = '<div dir="RTL">'. $title. '</div>';
 						return $title;
 					}
 				else{
@@ -169,6 +167,25 @@ $title = '<div dir="RTL">'. $title. '</div>'.$rtlwert;
 }
 add_filter( 'the_title', 'rtl_title', 10, 2 );
 
+
+function rtl_content( $content) {
+	if (   in_the_loop() && is_page()   ){
+		$rtlwert = get_post_meta(  get_the_ID(), 'rtl_switch_active', true );
+				
+				if($rtlwert === "Yes")
+					{
+						$content = '<div dir="RTL">'. $content. '</div>';
+						return $content;
+					}
+				else{
+					return $content;
+				}
+		}
+
+
+	else{ return $content;}
+}
+add_filter( 'the_content', 'rtl_title', 10, 2 );
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 ?>
