@@ -7,10 +7,6 @@
 * Author: espiat
 * Author URI: www.m.espiat.com
 */
-
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
-
-
 class Rational_Meta_Box {
 	private $screens = array(
 		'post',
@@ -151,4 +147,28 @@ Effects the_content & the_title';
 }
 new Rational_Meta_Box;
 
+// 
+function rtl_title( $title) {
+	if (   in_the_loop() && is_single()   ){
+
+		$rtlwert = get_post_meta(  get_the_ID(), 'rtl_switch_active', true );
+				
+$title = '<div dir="RTL">'. $title. '</div>'.$rtlwert;
+				if($rtlwert == "YES")
+					{
+					
+						return $title;
+					}
+				else{
+					return $title;
+				}
+		}
+
+
+	else{ return $title;}
+}
+add_filter( 'the_title', 'rtl_title', 10, 2 );
+
+
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 ?>
