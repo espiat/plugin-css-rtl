@@ -3,7 +3,7 @@
 * Plugin Name: RTL Meta Box
 * Plugin URI: 
 * Description: Add meta box to every page and post. If active on a page the css changes the body screen reading to rtl (right to left) for the_content & the_title. 
-* Version: 1.0
+* Version: 1.1
 * Author: espiat
 * Author URI: www.m.espiat.com
 */
